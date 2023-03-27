@@ -7,10 +7,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.use(new OpenIDConnectStrategy({
-  issuer: 'https://cloudidentity1234.ice.ibmcloud.com/oidc/endpoint/default',
-  authorizationURL: 'https://cloudidentity1234.ice.ibmcloud.com/v1.0/endpoint/default/authorize',
-  tokenURL: 'https://cloudidentity1234.ice.ibmcloud.com/v1.0/endpoint/default/token',
-  userInfoURL: 'https://cloudidentity1234.ice.ibmcloud.com/v1.0/endpoint/default/userinfo',
+  issuer: process.env['ISSUER'],
+  authorizationURL: process.env['AUTHORIZATIONURL'],
+  tokenURL: process.env['TOKENURL'],
+  userInfoURL: process.env['USRINFO'],
   clientID: process.env['CLIENT_ID'],
   clientSecret: process.env['CLIENT_SECRET'],
   callbackURL: '/oauth2/redirect',
@@ -49,15 +49,16 @@ router.get('/oauth2/redirect', passport.authenticate('openidconnect', {
   successReturnToOrRedirect: '/',
   failureRedirect: '/login'
 }));
-router.get('/profile', function(req, res, next)
-{
 
-});
 router.post('/logout', function(req, res, next) {
   //router.post('/logout', (req, res) => {
   req.logout();
   req.session.destroy();
   res.redirect(process.env.OIDC_CI_BASE_URI + '/idaas/mtfim/sps/idaas/logout?themeId=68eea2c6-f4af-4841-8fbe-c44de1392bf1');
 });
-
+//Added on 5th March
+router.post('/profile', function(req, res, next) {
+ 
+ });
+//Added on 5th March
 module.exports = router;

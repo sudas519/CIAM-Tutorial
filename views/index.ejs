@@ -12,11 +12,12 @@
 		<section class="todoapp">
 			<nav class="nav">
 				<ul>
-					<li class="user"><%= user.name || user.username %></li>
+					<!--li class="user"><%= user.name || user.username %></li-->
 					
 					<li>
 						<form action="/profile" method="post">
-							<button class="logout" type="submit">Edit Profile</button>	
+							<button class="user" type="submit"><%= user.name || user.username %></li></button>	
+							<!--input type="hidden" name="_csrf" value="<%= csrfToken %>"-->
 						</form>
 					</li>
 					<li>
@@ -29,9 +30,9 @@
 				</ul>
 			</nav>
 			<header class="header">
-				<h1>todos</h1>
+				<h1>Shopping Cart</h1>
 				<form action="/" method="post">
-					<input class="new-todo" name="title" placeholder="What needs to be done?" autofocus>
+					<input class="new-todo" name="title" placeholder="Add shopping items" autofocus>
 					<% if (filter) { %>
 					<input type="hidden" name="filter" value="<%= filter %>"/>
 					<% } %>
@@ -98,7 +99,7 @@
 			<% } %>
 		</section>
 		<footer class="info">
-			<p>Double-click to edit a todo</p>
+			<p>Double-click to edit an item</p>
 			<p>Created by <a href="https://www.ibm.com">IBM</a></p>
 			
 		</footer>

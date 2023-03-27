@@ -70,6 +70,7 @@ app.get('/logout', function(req, res) {
     res.redirect('http://timbrels1.fyre.ibm.com:3000');
   });
 });
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
